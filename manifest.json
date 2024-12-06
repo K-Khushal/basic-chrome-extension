@@ -1,0 +1,20 @@
+{
+  "name": "Basic Chrome Extension",
+  "description": "A basic chrome extension to get a new look for new tab",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "48": "assets/icon/community-icon.png",
+    "128": "assets/icon/community-icon-128.png"
+  },
+  "permissions": ["history","topSites","favicon"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": "assets/icon/community-icon.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}

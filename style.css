@@ -1,0 +1,2535 @@
+/* 
+ * Material You NewTab
+ * Copyright (c) 2023-2024 XengShi
+ * Licensed under the GNU General Public License v3.0 (GPL-3.0)
+ * You should have received a copy of the GNU General Public License along with this program. 
+ * If not, see <https://www.gnu.org/licenses/>.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face
+{
+  font-family: "Google Sans";
+  src: url("/assets/fonts/GoogleSansDisplay-Regular.ttf") format("truetype");
+}
+
+*
+{
+  box-sizing: border-box;
+  font-family: "Google Sans", "Noto Sans Display", sans-serif;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+:root
+{
+  /* 🔵🔵🔵 */
+  /* ⚠️ Please don't change the color value or names for Blue (if ? modifying code would be difficult */
+  --gap: 30px;
+  --round: 30px;
+  --shortcut-bar-gap-and-padding: 10px;
+  --accentLightTint-blue: #e2eeff;
+  --darkColor-blue: #4382ec;
+  --darkerColor-blue: #3569b2;
+
+  /* 🔴🔴🔴 */
+  --textColorDark-blue: #1b3041;
+  --whitishColor-blue: #ffffff;
+  --accentLightTint-brown: #eae3c9;
+  --darkColor-brown: #705347;
+  --darkerColor-brown: #4e3930;
+  --textColorDark-brown: #16100d;
+
+  /* 🟡🟡🟡 */
+  --whitishColor-brown: #ffffff;
+  --bg-color-blue: #bbd6fd;
+  --bg-color-brown: #dfc28d;
+  --bg-color-cyan: #9cefef;
+  --bg-color-dark: #171615;
+  --bg-color-green: #c7e4c7;
+
+  /* 🟢🟢🟢 */
+  --bg-color-grey: #565656;
+  --bg-color-orange: #ffd8b2;
+  --bg-color-pink: #f9c8d6;
+  --bg-color-purple: #dac2e8;
+  --bg-color-red: #fdbdbd;
+  --bg-color-silver: #c6c6c6;
+
+  /* Cyan */
+  /* --bg-color-cyan: #9bffff;
+    --accentLightTint-cyan: #d5ffff;
+    --darkerColor-cyan: #5E9CA0;
+    --darkColor-cyan: #00CED1;
+    --textColorDark-cyan: #08354B; */
+
+  --bg-color-yellow: #ffed80;
+  --accentLightTint-cyan: #d5ffff;
+  --darkColor-cyan: #09b2b4;
+  --darkerColor-cyan: #07787f;
+  --textColorDark-cyan: #08354b;
+  --whitishColor-cyan: #ffffff;
+
+  /* 🩷💗🩷 */
+  --accentLightTint-dark: #3c3c3c;
+  --darkColor-dark: #212121;
+  --darkerColor-dark: #eeeeee;
+  --textColorDark-dark: #d6d6d6;
+  --whitishColor-dark: #cccccc;
+  --accentLightTint-green: #e1f1e1;
+
+  /* 🟠🟠🟠 */
+  --darkColor-green: #5cba5c;
+  --darkerColor-green: #458245;
+  --textColorDark-green: #1b411b;
+  --whitishColor-green: #ffffff;
+  --accentLightTint-grey: #818181;
+  --darkColor-grey: #434343;
+
+  /* 🟣🟣🟣 */
+  --darkerColor-grey: #262626;
+  --textColorDark-grey: #111111;
+  --whitishColor-grey: #999999;
+  --accentLightTint-orange: #ffedd5;
+  --darkColor-orange: #ec844d;
+  --darkerColor-orange: #b26d3e;
+
+  /* ⚪ Silver */
+  --textColorDark-orange: #412b1e;
+  --whitishColor-orange: #ffffff;
+  --accentLightTint-pink: #ffebf2;
+  --darkColor-pink: #ec5e78;
+  --darkerColor-pink: #b24b64;
+  --textColorDark-pink: #411b28;
+
+  /* 🟤🟤🟤 */
+  --whitishColor-pink: #ffffff;
+  --accentLightTint-purple: #e9e2f3;
+  --darkColor-purple: #9563b5;
+  --darkerColor-purple: #724b8f;
+  --textColorDark-purple: #2d1b3e;
+  --whitishColor-purple: #ffffff;
+
+  /* 🩶🩶🩶 Grey */
+  --accentLightTint-red: #ffe7e7;
+  --darkColor-red: #ec4343;
+  --darkerColor-red: #b23535;
+  --textColorDark-red: #411b1b;
+  --whitishColor-red: #ffffff;
+  --max-shortcut-bar-width: 60vw;
+
+  /* ⚫⚫⚫ */
+  --always-show-dock-background: 0;
+  --accentLightTint-silver: #e5e5e5;
+  --darkColor-silver: #9e9e9e;
+  --darkerColor-silver: #6f6f6f;
+  --textColorDark-silver: #333333;
+  --whitishColor-silver: #ffffff;
+
+  /* ----------------- */
+
+  /* Global variables */
+  --shortcut-size: 44px;
+  --accentLightTint-yellow: #fff6c3;
+
+  /* Shortcut bar */
+  --darkColor-yellow: #d1a93d;
+  --darkerColor-yellow: #ae9502;
+  --textColorDark-yellow: #2f2707;
+  --whitishColor-yellow: #ffffff;
+}
+
+.resultBox
+{
+  border-radius: 25px;
+  bottom: -100px;
+
+  left: 0;
+  max-height: 222px;
+  opacity: 0;
+  overflow-y: auto;
+  padding: 5px 10px;
+
+  pointer-events: none;
+  position: absolute;
+  /* For Firefox */
+
+  /* Initially hidden */
+  scrollbar-width: none;
+  transform: translateY(-70px);
+  transition: opacity 0.5s ease, transform 0.5s ease, z-index 0.5s ease;
+  width: 100%;
+  z-index: -1000;
+}
+
+.resultBox::-webkit-scrollbar
+{
+  display: none;
+  /* For Chrome, Safari, and Edge */
+}
+
+/* Visible state: when you want the result box to appear */
+.resultBox.show
+{
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  visibility: visible;
+  z-index: 1000;
+}
+
+.resultItem
+{
+  color: var(--textColorDark-blue);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 8px;
+}
+
+.resultItem.active,
+.resultItem:hover
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 15px;
+  color: #fff;
+}
+
+/* Theme */
+/* ⚫🟣🔵🔴🟡🟢🟠⚪ */
+
+.accentColor
+{
+  fill: var(--darkColor-blue);
+}
+
+.bgLightTint
+{
+  background-color: var(--accentLightTint-blue);
+  fill: var(--accentLightTint-blue);
+}
+
+/* .whitishColor {
+	fill: var(--whitishColor-blue);
+	background-color: var(--whitishColor-blue);
+} */
+
+.strokecolor
+{
+  stroke: var(--darkColor-blue);
+}
+
+.lessDark
+{
+  background-color: var(--bg-color-blue);
+  fill: var(--bg-color-blue);
+}
+
+/* ⚫🟣🟡🔵🔴🟠⚪🟢 */
+
+html
+{
+  height: 100%;
+  margin: 0;
+  scrollbar-width: none; /* For Firefox */
+  width: 100%;
+}
+
+.html::-webkit-scrollbar
+{
+  display: none;
+}
+
+body
+{
+  align-items: center;
+  background-attachment: fixed;
+  background-color: var(--bg-color-blue);
+  background-image: var(--bg-image, none);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: red; */
+  color: var(--textColorDark-blue);
+  display: flex;
+  height: 100vh; /* Ensure the image fits the viewport height */
+  justify-content: center;
+  margin: 0; /* Remove margin to avoid unwanted spacing */
+  min-height: 100%;
+  overflow: auto;
+  width: 100%;
+}
+
+/* ----------------- Google App Menu CSS Setup ----------------- */
+/* Dot Icon Container Styling */
+.googleAppsCont
+{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+  margin: 8px;
+  /* Set the size of the dots */
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  z-index: 2;
+  /* Set z-index */
+}
+
+/* Styling for the SVG icon */
+.dot-icon
+{
+  background-color: var(--accentLightTint-blue);
+  /* Icon color */
+  border-radius: 25%;
+  cursor: pointer;
+  fill: var(--darkColor-blue);
+  padding: 1px;
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+/* Hover effect for the icon */
+.dot-icon:hover
+{
+  fill: var(--darkerColor-blue);
+  /*transform: rotate(90deg) scale(1.05);*/
+}
+
+/* Tooltip Text Styling */
+.tooltip-text
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  left: 50%;
+  opacity: 0;
+  padding: 5px;
+  position: absolute;
+  /* Position below the icon */
+  text-align: center;
+  top: 120%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+  visibility: hidden;
+  white-space: nowrap;
+  z-index: 3;
+  /* Set z-index */
+}
+
+/* Show tooltip on hover */
+.googleAppsCont:hover .tooltip-text
+{
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure tooltip remains hidden when menu is visible */
+.menu-open .tooltip-text
+{
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Separator Styling */
+.separator
+{
+  background-color: var(--darkColor-blue);
+  height: 1px;
+  margin: 10px 0;
+  /* Adjust color as needed */
+  width: 100%;
+  /* Adjust spacing as needed */
+}
+
+/* Add Separator in Icon Container */
+.icon-container .separator
+{
+  grid-column: span 3;
+  /* Ensure separator spans across all columns */
+}
+
+/* Icon Container Styling (Placed Below Dot Icon) */
+.icon-container
+{
+  background-color: var(--accentLightTint-blue);
+  border: 8px solid var(--bg-color-blue);
+  border-radius: 30px;
+  /* Adjusted padding to account for scrollbar */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 icons per row */
+  justify-items: center;
+  /* Center icons within each grid cell */
+  max-height: calc(40px * 3 + 10px * 2 + 290px);
+  /* Absolute positioning for dynamic alignment */
+  overflow-y: auto;
+  /* Place below the dot icon */
+  padding: 20px;
+  position: absolute;
+  /* Limit to 12 icons (3 rows * icon size + gaps) */
+  right: 10px;
+  /* Add vertical scrollbar when needed */
+  top: 70px;
+  /* Ensure padding is included in width and height */
+  z-index: 3; /* This should be higher that z-index of [.googleAppsCont] */
+}
+
+/* Individual Icon Item Styling */
+.icon-item
+{
+  align-items: center;
+  background-color: var(--accentLightTint-blue);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.375rem;
+  justify-content: center;
+  min-height: 100%;
+  min-width: 100%;
+  padding: 8px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  /* Ensure consistent width */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  /* Default background */
+}
+
+/* Icon Styling */
+.menuicon
+{
+  aspect-ratio: 1/1;
+  color: var(--darkColor-blue);
+  height: 40px;
+  /*border: black 2px solid; !* border added *!*/
+  margin-bottom: 8px;
+}
+
+/* Label Styling */
+.label
+{
+  color: var(--textColorDark-blue);
+  font-size: 14px;
+}
+
+/* Short Label (Default) */
+.label.short
+{
+  /*display: block;*/
+  opacity: 1;
+}
+
+/* Full Label (Hidden by Default) */
+.label.full
+{
+  bottom: 0;
+  /*display: none;*/
+  opacity: 0;
+  /* Ensure text retains line breaks */
+  font-size: 0.8rem;
+  /* Center align text */
+  position: absolute;
+  text-align: center;
+  white-space: pre-line;
+}
+
+/* Hover Effect for Icon Item */
+.icon-item:hover
+{
+  background-color: var(--bg-color-blue);
+  transform: scale(1.1);
+  /* Add zoom-in effect */
+}
+
+/* Show Full Label on Hover for Multi-word Labels */
+.icon-item:hover .label.full
+{
+  /*display: block;*/
+  opacity: 1;
+}
+
+.icon-item:hover .label.short
+{
+  /*display: block;*/
+  opacity: 1;
+  /* Ensure single-word labels remain visible */
+}
+
+.icon-item:hover .label.short.one
+{
+  /*display: none;*/
+  opacity: 0;
+  /* Ensure single-word labels remain visible */
+}
+
+/* Customize scrollbar to appear on the border */
+/* For Chrome, Edge, Safari */
+.icon-container::-webkit-scrollbar
+{
+  width: 5px;
+  /* Match the border width */
+}
+
+.icon-container::-webkit-scrollbar-track
+{
+  background-color: transparent;
+  border-radius: 30px;
+}
+
+.icon-container::-webkit-scrollbar-thumb
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 30px;
+}
+
+.icon-container::-webkit-scrollbar-thumb:hover
+{
+  background-color: var(--darkerColor-blue);
+  border-radius: 30px;
+}
+
+/* For Firefox */
+.icon-container
+{
+  overflow-x: hidden;
+  /* Thin scrollbar */
+  scrollbar-color: var(--darkColor-blue) transparent;
+  /* Thumb color and track color */
+  scrollbar-width: thin;
+  /* Hide horizontal scrollbar */
+}
+
+/* .icon-container:hover {
+    scrollbar-color: var(--darkerColor-blue) transparent; /* Change the thumb color on hover 
+} */
+
+/* ----------------- End of Google App Menu ----------------- */
+
+.centerDiv
+{
+  display: grid;
+  grid-template-columns: auto auto;
+  height: fit-content;
+  padding-bottom: calc(var(--shortcut-size) + var(--gap) * 2);
+  /* background-color: #17a638; */
+  /* always leave enough space for the shortcuts bar at the bottom */
+  width: fit-content;
+}
+
+/* ____________Clock_____________________---- */
+#digitalClock
+{
+  border-radius: 100%;
+  height: 300px;
+  position: relative;
+  width: 300px;
+}
+
+#analogClock
+{
+  border-radius: 100%;
+  height: 300px;
+  position: relative;
+  width: 300px;
+}
+
+#clock svg
+{
+  animation: clockAnm 1s;
+  position: absolute;
+}
+
+@keyframes clockAnm
+{
+  from
+  {
+    transform: rotate(40deg);
+  }
+
+  to
+  {
+    transform: rotate(0deg);
+  }
+}
+
+.clock .centerPoint
+{
+  bottom: 0;
+  height: 20px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+}
+
+.clock .centerPoint .sui
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 10px;
+  height: 100px;
+  position: absolute;
+  top: -90px;
+  transform-origin: bottom;
+  width: 20px;
+}
+
+#hour
+{
+  background-color: var(--darkerColor-blue);
+  height: 80px;
+  top: -70px;
+  transform: rotate(90deg);
+  transition: transform 1.5s;
+}
+
+#hour::after
+{
+  background-color: var(--darkerColor-blue);
+  border-radius: 100px;
+  bottom: -10px;
+  content: "";
+  height: 30px;
+  position: absolute;
+  width: 20px;
+}
+
+#minute
+{
+  transition: transform 1.5s;
+  z-index: 9 !important;
+}
+
+#minute::after
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 100px;
+  bottom: -10px;
+  content: "";
+  height: 30px;
+  position: absolute;
+  width: 20px;
+}
+
+#second
+{
+  background-color: #00000000;
+  transition: transform 1s;
+}
+
+#second::after
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 100%;
+  content: "";
+  height: 20px;
+  position: absolute;
+  top: -28px;
+  width: 20px;
+}
+
+/* ---------------------- */
+.ttteexxtt
+{
+  /*bottom: 24%;*/
+  /* background-color: yellow; */
+  /*bottom: 18px; */
+  /*Because search engines has margin-bottom 20px*/
+  margin-top: 24px;
+  /*left: 10px;*/
+  /*position: absolute;*/
+   text-align: center;
+}
+
+#userText
+{
+  font-family: "Google Sans", "Noto Sans Display", sans-serif;
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+#date
+{
+  font-size: 1.4rem;
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+.digidate
+{
+  fill: var(--textColorDark-blue);
+}
+
+.amPm
+{
+  fill: var(--textColorDark-blue);
+}
+
+.digiclock
+{
+  fill: var(--darkColor-blue);
+  font-size: 8rem;
+  font-weight: lighter;
+  margin: auto;
+  /* background-color: yellow; */
+  text-anchor: middle;
+  width: fit-content;
+}
+
+#digihours
+{
+  fill: var(--darkerColor-blue);
+}
+
+#digicolon
+{
+  animation: blink 1s infinite;
+}
+
+@keyframes blink
+{
+  50%
+  {
+    opacity: 0;
+  }
+}
+
+/* __________end of clock___________________ */
+.leftDiv
+{
+  /* padding-right: 100px; */
+  transform: translateX(-100px);
+  /* background-color: rgba(102, 51, 153, 0.404); */
+  /* height: fit-content; */
+}
+
+.rightDiv
+{
+  position: relative;
+  transform: translateX(100px);
+  width: 640px;
+}
+
+.rightDiv .topDiv
+{
+  display: flex;
+  height: 196px;
+  justify-content: flex-end;
+}
+
+/* lrectangle______________________ */
+.rightDiv .topDiv .lrectangle
+{
+  border-radius: var(--round);
+  height: 100%;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+}
+
+#conditionText
+{
+  color: var(--textColorDark-blue);
+  font-size: 1.2rem;
+  max-width: 372px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cconnt
+{
+  bottom: 20px;
+  font-size: 1rem;
+  height: fit-content;
+  position: absolute;
+  width: calc(100% - 40px);
+}
+
+.tilesContainer
+{
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  height: 50px;
+  width: 100%;
+}
+
+.tilesContainer .tiles
+{
+  background-color: var(--whitishColor-blue);
+  border-radius: 22px;
+  height: 50px;
+  position: relative;
+}
+
+.tilesContainer .location
+{
+  background-color: var(--darkColor-blue);
+}
+
+.tilesContainer .location .location_spn
+{
+  color: #fff;
+}
+
+.tilesContainer .tiles .icon
+{
+  align-items: center;
+  aspect-ratio: 1/1;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.tilesContainer .tiles span
+{
+  bottom: 0;
+  color: var(--textColorDark-blue);
+  height: fit-content;
+  left: 46px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+}
+
+.humidityBar
+{
+  border-radius: 20px;
+  height: 40px;
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.humidityBar::after
+{
+  background: var(--darkColor-blue) url("./svgs/humidity.svg") no-repeat center center;
+  background-size: 66%;
+  border-radius: 100%;
+  content: "";
+  height: 100%;
+  position: absolute;
+  right: 0;
+  width: 40px;
+}
+
+.humidityBar .thinLine
+{
+  background-color: var(--whitishColor-blue);
+  border-radius: 10px;
+  bottom: 0;
+  height: 6px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  width: calc(100% - 60px);
+}
+
+.humidityBar .slider
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 100px;
+  /*100-60px because humidityIconContainer is 40px Width and 20px is margin which is = to 60*/
+  height: 100%;
+  min-width: 42%;
+  position: absolute;
+  transition: width 1s;
+  width: calc(10% - 60px);
+}
+
+#humidityLevel
+{
+  bottom: 0;
+  color: #fff;
+  height: fit-content;
+  left: 20px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  width: fit-content;
+}
+
+/* End of _____________________- */
+
+/* ------------Weather Pill------------- */
+.rightDiv .topDiv .rAndakar
+{
+  animation: rAndAnm 1s;
+  aspect-ratio: 1/1;
+  height: 100%;
+  margin-left: var(--gap);
+  position: relative;
+  /* transition: rotate 1s; */
+}
+
+@keyframes rAndAnm
+{
+  from
+  {
+    transform: rotate(-45deg);
+  }
+
+  to
+  {
+    transform: rotate(0deg);
+  }
+}
+
+.rightDiv .topDiv .rAndakar .wInfo
+{
+  bottom: 0;
+  height: 80%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(14px);
+  width: 100px;
+}
+
+#temp
+{
+  color: var(--darkerColor-blue);
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin: auto;
+  width: fit-content;
+}
+
+.tempUnit
+{
+  color: var(--darkColor-blue);
+  font-size: 0.4em;
+  left: 3px;
+  position: relative;
+  top: -1.1em;
+}
+
+#wIcon
+{
+  height: 80px;
+  margin-left: -30px;
+  margin-top: -11px;
+  width: 80px;
+}
+
+/* ------------End of Weather Pill------------- */
+
+/* ________________________________________________________ */
+
+/* _____________Searchbar___________________ */
+.searchbar
+{
+  border-radius: var(--round);
+  height: 60px;
+  margin-top: var(--gap);
+  outline: 2px solid #00000000;
+  /* background-color: var(--accentLightTint-blue); */
+  position: relative;
+  transition: outline 0.3s;
+  width: 100%;
+}
+
+.searchbar.active
+{
+  outline: 2px solid var(--darkColor-blue);
+}
+
+.searchbar .searchIcon
+{
+  height: 30px;
+  margin-left: 16px;
+  margin-top: 16px;
+  position: absolute;
+  width: 30px;
+}
+
+.searchbar-content
+{
+  align-items: center;
+  display: flex;
+  height: 100%;
+  padding-right: 10px;
+}
+
+#searchQ
+{
+  background-color: #00000000;
+  border: none;
+  bottom: 0;
+  flex-grow: 1;
+  font-size: 1rem;
+  height: 80%;
+  margin: auto auto auto 20px;
+  margin-left: 53px;
+  outline: none;
+  padding: 0 4px;
+  top: 0;
+}
+
+/* Default placeholder color */
+#searchQ::placeholder
+{
+  color: #757575;
+}
+
+/* Placeholder color when the condition is met */
+/* #searchQ.darker-placeholder::placeholder {
+	color: #3c3c3c;
+} */
+
+.searchControls
+{
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin-left: 10px;
+  right: 10px;
+}
+
+/* --------- .micIcon------------- */
+
+.micIcon
+{
+  align-items: center;
+  background-color: var(--whitishColor-blue);
+  border: 2px solid transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: var(--darkColor-blue);
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  margin-right: 10px;
+  padding: 3px;
+  transition: all 0.5s;
+  width: 40px;
+}
+
+.micIcon::after
+{
+  border: 2px solid transparent;
+  border-radius: 100%;
+  content: "";
+  height: 40px;
+  position: absolute;
+  width: 40px;
+}
+
+.micActive::after,
+.micIcon:hover::after
+{
+  animation: micAnimation 1s ease-in-out infinite;
+  border-bottom: 2px dashed var(--darkerColor-blue);
+  border-left: 2px dotted var(--darkColor-blue);
+  border-right: 2px solid var(--darkColor-blue);
+  border-top: 2px dashed var(--darkerColor-blue);
+  transition: all 0.5s;
+}
+
+.micIcon:hover
+{
+  background-color: #fffffff2;
+}
+
+@keyframes micAnimation
+{
+  0%
+  {
+    transform: rotate(0deg);
+  }
+
+  37%
+  {
+    transform: rotate(-20deg);
+  }
+
+  69%
+  {
+    transform: rotate(20deg);
+  }
+
+  100%
+  {
+    transform: rotate(0deg);
+  }
+}
+
+/* ---------End of .micIcon------------- */
+
+#enterBtn
+{
+  background-color: var(--darkColor-blue);
+  border: none;
+  border-radius: 100px;
+  color: white;
+  font-size: 1.1rem;
+  height: 40px;
+  padding: 0 26px;
+  transition: all 0.3s;
+}
+
+#enterBtn:hover
+{
+  background-color: var(--darkColor-blue);
+  color: #fff;
+  cursor: pointer;
+}
+
+#enterBtn:active
+{
+  transform: scale(0.9);
+}
+
+/* ________________End of Searchbar______________________ */
+
+.searchWithCont
+{
+  border-radius: var(--round);
+  display: flex;
+  font-size: 1rem;
+  margin-top: var(--gap);
+  position: relative;
+}
+
+.searchWithCont .hint
+{
+  /* background-color: var(--accentLightTint-blue); */
+  align-items: center;
+  border-radius: var(--round);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin-right: 16px;
+  padding: 10px;
+  position: relative;
+  width: 200px;
+}
+
+.searchWithCont .hint::after
+{
+  background-color: var(--accentLightTint-blue);
+  border-radius: 3px;
+  content: "";
+  height: 100%;
+  position: absolute;
+  right: -20px;
+  width: 6px;
+}
+
+.searchEnginesContainer
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-left: 20px;
+}
+
+.searchEnginesContainer .search-engine
+{
+  /* background-color: var(--accentLightTint-blue); */
+  align-items: center;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  height: 40px;
+  justify-content: center;
+  position: relative;
+}
+
+.searchEnginesContainer .search-engine svg
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 100%;
+  height: 30px;
+  margin-left: 4px;
+  padding: 3px;
+  width: 30px;
+}
+
+.searchEnginesContainer .search-engine label
+{
+  cursor: pointer;
+  margin: 0 16px 0 10px;
+}
+
+/* -----------Radio Button Customizing------------ */
+.search-engine input[type="radio"]
+{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--whitishColor-blue);
+  border: 2px solid var(--whitishColor-blue);
+  border-radius: 50%;
+  cursor: pointer;
+  height: 22px;
+  margin-right: 8px;
+  outline: none;
+  transition: 0.2s;
+  width: 22px;
+}
+
+.search-engine input[type="radio"]:checked
+{
+  background-color: var(--darkColor-blue);
+}
+
+/* -----------end of Radio Button Customizing------------ */
+
+/* ----------Shortcuts----------------- */
+
+#shortcuts-section
+{
+  bottom: 0;
+  display: flex;
+  height: calc(var(--shortcut-size) + var(--gap) * 2);
+  justify-content: center;
+  left: 0;
+  margin: auto;
+  /* background: gold; */
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+
+#shortcuts-section .wrapper
+{
+  align-items: stretch;
+  display: inline-flex;
+  height: fit-content;
+  /* make sure elements are next to each other */
+  position: relative;
+  /* make sure both elements grow to the same height */
+  width: fit-content;
+}
+
+/* Invisible element tracking height changes */
+#shortcuts-section #flexMonitor
+{
+  height: 100%;
+  position: absolute;
+  /* This will match the height of .shortcutsContainer, which it is supposed to monitor */
+  visibility: hidden;
+}
+
+/* Invisible element to get standard height */
+#shortcuts-section #defaultMonitor
+{
+  height: calc(
+    var(--shortcut-size) + var(--gap) + var(--shortcut-bar-gap-and-padding)
+  );
+  /* This is the standard height of one row */
+  position: absolute;
+  visibility: hidden;
+}
+
+.shortcutsContainer
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  justify-content: center;
+  margin-top: calc(var(--gap) - var(--shortcut-bar-gap-and-padding));
+  max-width: calc(
+    var(--max-shortcut-bar-width) -
+    mod(var(--max-shortcut-bar-width) -var(--shortcut-bar-gap-and-padding),
+    var(--shortcut-size) + var(--shortcut-bar-gap-and-padding))
+  );
+  padding: var(--shortcut-bar-gap-and-padding);
+  pointer-events: auto;
+  transition: transform 0.5s;
+  /* gap: var(--gap) var(--shortcut-bar-gap-and-padding); */
+  width: fit-content;
+}
+
+.shortcutsContainer::before
+{
+  background-color: var(--accentLightTint-blue);
+  border-radius: 34px;
+  bottom: 0;
+  content: "";
+  left: 0;
+  opacity: var(--always-show-dock-background);
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 0.5s;
+  z-index: -1;
+}
+
+.shortcutsContainer.showBackground::before
+{
+  opacity: 1;
+}
+
+.shortcutsContainer .shortcuts
+{
+  position: relative;
+  transition: all 0.3s;
+}
+
+.shortcutsContainer .shortcuts:hover
+{
+  border-radius: 100px;
+  /* box-shadow: 0 5px 10px var(--accentLightTint-blue); */
+  transform: translateY(-10px) scale(1.03);
+}
+
+.shortcuts .shortcut-name
+{
+  bottom: -30px;
+  color: var(--textColorDark-blue);
+  font-size: 1rem;
+  left: 50%;
+  margin: auto;
+  opacity: 0;
+  /* Center horizontally */
+  position: absolute;
+  /* background-color: #000000d7; */
+  right: 0;
+  text-align: center;
+  transform: translateX(-50%);
+  transition: all 0.3s;
+  visibility: hidden;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.shortcuts:hover .shortcut-name
+{
+  opacity: 1;
+  visibility: visible;
+}
+
+.shortcutsContainer .shortcuts a
+{
+  border-radius: 10px;
+  display: block;
+  height: var(--shortcut-size);
+  width: var(--shortcut-size);
+  background-color: var(--accentLightTint-blue);
+}
+
+/*.shortcutsContainer .shortcuts a:has(svg)*/
+/*{*/
+/*  background-color: var(--accentLightTint-blue);*/
+/*}*/
+
+/*.shortcutsContainer .shortcuts a:has(img)*/
+/*{*/
+/*  background-color: var(--darkColor-blue);*/
+/*}*/
+
+.shortcutsContainer .shortcuts a svg
+{
+  height: 36px;
+  width: 36px;
+}
+
+.shortcutsContainer .shortcuts .shortcutLogoContainer
+{
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.shortcutsContainer .shortcuts .shortcutLogoContainer img
+{
+  height: 36px;
+  width: 36px;
+}
+
+/* ----------end of Shortcuts----------------- */
+
+/* -----------Ai-Tools----------------- */
+.aiToolsCont
+{
+  border-radius: 100px;
+  bottom: var(--gap);
+  /* background-color: yellow; */
+  display: flex;
+  height: 50px;
+  left: var(--gap);
+  margin: auto;
+  overflow-x: hidden;
+  position: fixed;
+  width: fit-content;
+}
+
+.aiToolsCont .hangno
+{
+  align-items: center;
+  background-color: var(--accentLightTint-blue);
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: 0 16px;
+  z-index: 2;
+}
+
+.aiToolsCont .hangno .icon
+{
+  height: 26px;
+  margin-right: 12px;
+  width: 26px;
+}
+
+.aiToolsCont .hangno .label
+{
+  color: var(--textColorDark-blue);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.aiToolsCont .toolsCont
+{
+  /* display: flex; */
+  display: none;
+  /* background-color: orange; */
+  gap: 0;
+  margin-left: 30px;
+  opacity: 0.2;
+  position: relative;
+  transform: scale(0.5) translateX(-70px);
+  transform-origin: left;
+  transition: all 500ms;
+}
+
+.aiToolsCont .toolsCont::before
+{
+  background-color: var(--accentLightTint-blue);
+  border-radius: 6px;
+  content: "";
+  height: 100%;
+  left: -18px;
+  position: absolute;
+  width: 6px;
+}
+
+.aiToolsCont .toolsCont a
+{
+  align-items: center;
+  background-color: var(--accentLightTint-blue);
+  border-radius: 100px;
+  color: var(--textColorDark-blue);
+  display: flex;
+  font-size: 1rem;
+  height: 100%;
+  justify-content: center;
+  padding: 0 16px;
+  text-decoration: none;
+}
+
+.aiToolsCont .toolsCont .tIcon
+{
+  height: 26px;
+  margin-right: 12px;
+  /* background-color: turquoise; */
+  width: 26px;
+}
+
+/* -----------End of Ai-Tools---------- */
+
+/* -------media query ------------------- */
+
+@media screen and (max-width: 1400px)
+{
+  .leftDiv
+  {
+    transform: translateX(-50px);
+  }
+
+  .rightDiv
+  {
+    transform: translateX(50px);
+  }
+}
+
+@media screen and (max-width: 1200px)
+{
+  body
+  {
+    display: block;
+  }
+
+  .shortcutsContainer
+  {
+    margin-top: 169px;
+  }
+
+  .centerDiv
+  {
+    /* display: grid; */
+    grid-template-columns: auto;
+    /* width: fit-content; */
+    /* height: 500px; */
+    /* background-color: orange; */
+    left: 0;
+    margin: var(--gap) auto auto;
+    position: absolute;
+    right: 0;
+  }
+
+  .leftDiv
+  {
+    margin-bottom: var(--gap);
+    /* background-color: green; */
+    transform: translateX(0px);
+  }
+
+  .rightDiv
+  {
+    /* position: relative;
+        width: 640px; */
+    transform: translateX(0px);
+    /* background-color: rgba(0, 0, 255, 0.159); */
+  }
+
+  .ttteexxtt
+  {
+    /* background-color: yellow; */
+    /*bottom: 0;*/
+    height: fit-content;
+    left: 300px;
+    margin: auto auto auto var(--gap);
+    top: 0;
+    /*Because Clock width is 300px*/
+    width: fit-content;
+  }
+}
+
+/* ---------------Menu-bar-css---------------- */
+.menuBar
+{
+  backdrop-filter: blur(15px) saturate(160%);
+  background-color: #0000004f;
+  height: 100%;
+  opacity: 0;
+  overflow: hidden;
+  position: fixed;
+  transition: all 0.5s;
+  /*we are increasing opacity in js file*/
+  width: 100%;
+  z-index: 9999;
+}
+
+.menuBar .menuCont
+{
+  background-color: var(--accentLightTint-blue);
+  border-bottom-left-radius: var(--round);
+  height: 100%;
+  position: absolute;
+  /* change on some languages for fix the buttons */
+  right: 0;
+  transform: translateX(100%);
+  transition: all 0.5s;
+  width: 400px;
+}
+
+.menuBar .menuCont .topRounder
+{
+  height: var(--round);
+  /*30px*/
+  left: -30px;
+  /* background-color: #17a638; */
+  position: absolute;
+  width: var(--round);
+  /* transform: translateX(-100%); */
+}
+
+.menuCont .topDiv
+{
+  background-color: var(--bg-color-blue);
+  height: 140px;
+  /*🚦🛺 🚜*/
+  position: relative;
+  width: 100%;
+}
+
+.menuCont .topDiv::after
+{
+  background-color: var(--accentLightTint-blue);
+  border-top-left-radius: var(--round);
+  border-top-right-radius: var(--round);
+  bottom: 0;
+  content: "";
+  height: var(--gap);
+  position: absolute;
+  width: 100%;
+}
+
+.menuCont .topDiv h1
+{
+  bottom: 0;
+  /* background-color: yellow; */
+  color: var(--textColorDark-blue);
+  font-size: 1.6rem;
+  height: fit-content;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateY(-50%);
+  width: fit-content;
+}
+
+.menuCont .optCont
+{
+  height: calc(100% - 140px);
+  opacity: 0;
+  /*for this 👁️ look above at🚦🛺 🚜*/
+  /* background-color: oldlace; */
+  overflow-x: hidden;
+  overflow-y: scroll;
+  transform: translateX(100%);
+  transition: all 0.6s;
+  /* Allow vertical scrolling only */
+  width: 100%;
+  /* Hide horizontal overflow */
+}
+
+.menuCont .optCont .page
+{
+  padding: 0 var(--gap) var(--gap) var(--gap);
+  position: absolute;
+  transition: all 0.6s;
+  width: 100%;
+}
+
+/* -----------Scrollbar for menu---------------- */
+/* For WebKit browsers (Chrome, Safari) */
+.menuCont .optCont::-webkit-scrollbar
+{
+  width: 2px;
+  /* Width of the scrollbar */
+}
+
+/* Track */
+.menuCont .optCont::-webkit-scrollbar-track
+{
+  background: transparent;
+  /* Background of the track */
+}
+
+/* Handle */
+.menuCont .optCont::-webkit-scrollbar-thumb
+{
+  background: var(--darkColor-blue);
+  /* Color of the scrollbar handle */
+  border-radius: 2px;
+  /* Rounded corners for the scrollbar handle */
+}
+
+/* For Firefox */
+.menuCont .optCont
+{
+  scrollbar-color: var(--darkColor-blue) transparent;
+  /* Makes the scrollbar thin */
+  scrollbar-width: thin;
+  /* Handle color and track color */
+}
+
+/* -------------End of Scrollbar for menu-------------- */
+
+.menuBar .optCont .tilesCont
+{
+  display: grid;
+  gap: var(--gap);
+  /* background-color: #17a638; */
+  grid-template-columns: 1fr 1fr;
+  height: 50px;
+  width: 100%;
+}
+
+.tilesCont .tiles
+{
+  align-items: center;
+  background-color: var(--darkColor-blue);
+  border-radius: 20px;
+  color: var(--accentLightTint-blue);
+  display: flex;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.tilesCont .tiles .icon
+{
+  height: 24px;
+  margin-left: 13px;
+  margin-right: 13px;
+  width: 24px;
+}
+
+.divider
+{
+  background-color: #fff;
+  border-radius: 3px;
+  height: 6px;
+  margin: 20px auto;
+  width: 100px;
+}
+
+/* --- 🔴⚪🟡style for toggle buttons---- */
+.switch
+{
+  display: inline-block;
+  height: 34px;
+  margin-left: 8px;
+  min-width: 60px;
+  position: relative;
+}
+
+/* Hide the default checkbox input */
+.switch input
+{
+  display: none;
+}
+
+/* Styling for the slider */
+.toggle
+{
+  background-color: var(--bg-color-blue);
+  border-radius: 34px;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  /* Background color when off */
+  top: 0;
+  transition: 0.4s;
+}
+
+/* Styling for the slider when it's in the "on" position */
+.toggle:before
+{
+  background-color: var(--accentLightTint-blue);
+  border-radius: 50%;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  /* Slider color when on */
+  transition: 0.4s;
+  width: 26px;
+}
+
+#shortcutEditButton
+{
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 34px;
+  cursor: pointer;
+  display: flex;
+  fill: var(--darkerColor-blue);
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  transition: 0.3s all;
+  width: 100%;
+}
+
+.toggleTextsCont .ttcont.inactive
+{
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Apply styles when the input is checked (on) */
+input:checked + .toggle
+{
+  background-color: var(--darkColor-blue);
+  /* Background color when on */
+}
+
+input:checked + .toggle:before
+{
+  transform: translateX(26px);
+}
+
+/* --- END OF 🔴⚪🟡style for toggle buttons---- */
+
+.toggleTextsCont .ttcont
+{
+  align-items: center;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.unflex
+{
+  display: block !important;
+}
+
+.ttcont input
+{
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  margin-top: 6px;
+  outline: none;
+  padding: 0 11px;
+  width: 100%;
+}
+
+.ttcont .texts .bigText
+{
+  color: var(--textColorDark-blue);
+  font-size: 1.2rem;
+}
+
+.ttcont .texts .infoText
+{
+  color: var(--textColorDark-blue);
+  font-size: 0.9rem;
+  margin-top: -3px;
+  opacity: 0.86;
+}
+
+.bottom
+{
+  /* background-color: #17a638; */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.bottom a
+{
+  color: var(--darkColor-blue);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.bottom button
+{
+  background-color: var(--darkColor-blue);
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 6px 20px;
+}
+
+.resetbtn
+{
+  background-color: var(--darkColor-blue);
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 6px 20px;
+  width: -webkit-fill-available;
+}
+
+.topBar
+{
+  align-items: center;
+  background-color: var(--accentLightTint-blue);
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  left: 0;
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+#backButton
+{
+  background: none;
+  border: none;
+  cursor: pointer;
+  fill: var(--textColorDark-blue);
+}
+
+.rightButtons
+{
+  display: flex;
+  gap: 24px;
+}
+
+#newShortcutButton svg
+{
+  transition: transform 0.3s ease;
+}
+
+#newShortcutButton:active svg
+{
+  transform: scale(1.2);
+}
+
+.rotateResetButton
+{
+  transform: rotate(-360deg);
+  transition: transform 0.3s ease;
+}
+
+#resetButton,
+#newShortcutButton
+{
+  background: none;
+  border: none;
+  cursor: pointer;
+  fill: var(--textColorDark-blue);
+}
+
+#newShortcutButton.inactive
+{
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.pageTitle
+{
+  color: var(--textColorDark-blue);
+  font-size: 1.6rem;
+  margin-top: 10px;
+  width: 100%;
+}
+
+#editShortcutsListInfo
+{
+  font-size: 0.8rem;
+  margin-bottom: var(--gap);
+  margin-top: 5px;
+  text-align: justify;
+}
+
+.shortcutSettingsEntry
+{
+  align-items: center;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.shortcutSettingsEntry input
+{
+  background: none;
+  border: none;
+  width: calc(100% - var(--gap));
+}
+
+.shortcutSettingsEntry .shortcutName
+{
+  color: var(--textColorDark-blue);
+  font-size: 1.2rem;
+  text-overflow: ellipsis;
+}
+
+.shortcutSettingsEntry .URL
+{
+  color: var(--textColorDark-blue);
+  font-size: 0.9rem;
+  margin-top: -3px;
+  opacity: 0.86;
+  text-overflow: ellipsis;
+}
+
+.delete button
+{
+  align-items: center;
+  background: var(--bg-color-blue);
+  border: none;
+  border-radius: 34px;
+  cursor: pointer;
+  display: flex;
+  fill: var(--textColorDark-blue);
+  height: 34px;
+  justify-content: center;
+  transition: 0.3s all;
+  width: 60px;
+}
+
+.delete button:hover
+{
+  background: var(--darkColor-blue);
+  fill: white;
+}
+
+.delete button.inactive
+{
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.addShortcutContainer button
+{
+  align-items: center;
+  background: var(--darkColor-blue);
+  border: none;
+  border-radius: 34px;
+  cursor: pointer;
+  display: flex;
+  fill: white;
+  height: 34px;
+  justify-content: center;
+  position: absolute;
+  transition: 0.3s all;
+  width: 60px;
+}
+
+/* Placeholder InputText color*/
+#userproxy
+{
+  background-color: var(--whitishColor-blue);
+  color: var(--textColorDark-blue);
+}
+
+#userLoc
+{
+  background-color: var(--whitishColor-blue);
+  color: var(--textColorDark-blue);
+}
+
+#userAPI
+{
+  background-color: var(--whitishColor-blue);
+  color: var(--textColorDark-blue);
+}
+
+/* ---------------Menu-bar-css---------------- */
+
+/* --------------Theming stuff------------------ */
+.themingStuff
+{
+  margin-top: 30px;
+  position: relative;
+}
+
+.themingStuff:hover:after
+{
+  content: "Reload the page after applying themes";
+  font-size: 0.74rem;
+  /* background-color: red; */
+  margin-right: 6px;
+  margin-top: -20px;
+  position: absolute;
+  right: 0;
+}
+
+.themingStuff,
+.languageSection
+{
+  display: flex;
+  gap: var(--gap);
+  height: 50px;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.languageSelector
+{
+  align-items: center;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* width: 80%; */
+  background-color: var(--whitishColor-blue);
+  border: 2px solid transparent;
+  /* adding transparent border on focus it will be turned to theme color*/
+  border-radius: 26px;
+  color: var(--textColorDark-blue);
+  /* 5 divs in the first row */
+  cursor: pointer;
+  display: grid;
+  grid-auto-rows: auto;
+  grid-gap: 10px;
+  /* padding-right: 0px; */
+  grid-template-columns: repeat(5, 1fr);
+  height: fit-content;
+  /* Remove default browser styles */
+  justify-content: center;
+  /* For Safari */
+  padding: 12px;
+  /* For Firefox */
+  padding-left: 13px;
+  scrollbar-color: var(--darkColor-blue) transparent;
+
+  /* Scrollbar styles for Firefox */
+  scrollbar-width: thin;
+  width: 240px;
+}
+
+/* Scrollbar styles for Chrome, Edge, Safari */
+.languageSelector::-webkit-scrollbar
+{
+  width: 6px;
+}
+
+.languageSelector::-webkit-scrollbar-track
+{
+  background-color: transparent;
+}
+
+.languageSelector::-webkit-scrollbar-thumb,
+.languageSelector::-webkit-scrollbar-thumb:hover
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 3px;
+}
+
+.languageSelector:focus
+{
+  border: 2px solid var(--darkColor-blue);
+  /* color matching border on focus */
+  outline: none;
+  /* Removes the default outline */
+}
+
+.colorsContainer
+{
+  align-items: center;
+  background-color: var(--whitishColor-blue);
+  border-radius: 26px;
+  display: grid;
+  grid-auto-rows: auto;
+
+  grid-gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  /* 5 divs in the first row */
+  height: fit-content;
+  justify-content: center;
+  padding: 10px;
+  /* padding-right: 0px; */
+  width: fit-content;
+}
+
+.colorsContainer input[type="radio"]
+{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border-radius: 18px;
+  cursor: pointer;
+  height: 36px;
+  outline: none;
+  /* margin-right: 10px; */
+  width: 36px;
+}
+
+.colorsContainer input[value="blue"]
+{
+  background-color: #4382ec;
+}
+
+.colorsContainer input[value="yellow"]
+{
+  background-color: #ffcc00;
+}
+
+.colorsContainer input[value="red"]
+{
+  background-color: #ec4343;
+}
+
+.colorsContainer input[value="green"]
+{
+  background-color: #5cba5c;
+}
+
+.colorsContainer input[value="cyan"]
+{
+  background-color: #00ced1;
+}
+
+.colorsContainer input[value="orange"]
+{
+  background-color: #ec844d;
+}
+
+.colorsContainer input[value="purple"]
+{
+  background-color: #9563b5;
+}
+
+.colorsContainer input[value="pink"]
+{
+  background-color: #ec5e78;
+}
+
+.colorsContainer input[value="brown"]
+{
+  background-color: #705347;
+}
+
+.colorsContainer input[value="silver"]
+{
+  background-color: #9e9e9e;
+}
+
+.colorsContainer input[value="grey"]
+{
+  background-color: #585858;
+}
+
+.colorsContainer input[value="dark"]
+{
+  background-color: #171717;
+}
+
+.colorsContainer input[type="radio"]:checked::after
+{
+  background: url("./svgs/tick.svg") center center no-repeat;
+  background-size: 74%;
+  content: "";
+  height: 36px;
+  position: absolute;
+  width: 36px;
+}
+
+.themingStuff .btn
+{
+  aspect-ratio: 1/1;
+  background-color: var(--whitishColor-blue);
+  border-radius: 100%;
+  height: 100%;
+  right: 0;
+  z-index: 2;
+}
+
+.languageIcon
+{
+  align-items: center;
+  aspect-ratio: 1/1;
+  background-color: var(--whitishColor-blue);
+  border-radius: 100%;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  right: 0;
+  z-index: 2;
+}
+
+/* Upload/Clear Buttons */
+.uploadClearContainer
+{
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  justify-content: space-between;
+  margin-top: 122px; /* Add spacing below the theming section */
+}
+
+/* Styling for Upload/Clear Buttons with SVGs */
+.uploadButton,
+.randomButton,
+.clearButton
+{
+  align-items: center;
+  background-color: var(--whitishColor-blue);
+  border: 2px solid transparent;
+  border-radius: 26px;
+  color: var(--darkColor-blue);
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  /*white-space: nowrap; */
+  gap: 10px; /* Space between SVG and text */
+  justify-content: center;
+  padding: 10px 20px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.uploadButton
+{
+  font-size: 0.95rem !important;
+}
+
+.randomButton
+{
+  padding: 10px;
+}
+
+.clearButton
+{
+  background-color: var(--darkColor-blue) !important;
+  color: var(--whitishColor-blue) !important;
+  padding: 10px;
+}
+
+/* Ensure consistent SVG sizing */
+.uploadButton svg,
+.randomButton svg,
+.clearButton svg
+{
+  height: 24px;
+  width: 24px;
+}
+
+/* Hover Effects */
+.uploadButton:hover,
+.randomButton:hover
+{
+  background-color: var(--darkColor-blue);
+  color: var(--whitishColor-blue);
+}
+
+.clearButton:hover
+{
+  background-color: var(--whitishColor-blue) !important;
+  color: var(--darkColor-blue) !important;
+}
+
+/* File input remains hidden */
+#imageUpload
+{
+  display: none;
+}
+
+.spacer
+{
+  height: 35px;
+  /* Adjust this value to create space */
+}
+
+/* #darkTheme {
+	grid-column: span 2;
+	width: 82px;
+} */
+
+/* <!-- ----Color Picker || ColorPicker---- --> */
+#colorPicker
+{
+  display: none;
+}
+
+.colorPickerLabel
+{
+  background: var(--accentLightTint-blue);
+  border: 2px solid transparent;
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.8rem;
+  grid-column: span 3;
+  height: 100%;
+  justify-content: center;
+  line-height: 35px;
+  text-align: center;
+  width: 100%;
+}
+
+/* <!-- ----End of Color Picker || ColorPicker---- --> */
+
+/* -----------End of theming stuff---------------- */
+
+#menuButton
+{
+  background-color: var(--accentLightTint-blue);
+  border-radius: 100%;
+  bottom: var(--gap);
+  cursor: pointer;
+  height: 50px;
+  position: fixed;
+  right: var(--gap);
+  width: 50px;
+}
+
+#menuButton::after
+{
+  border: 4px solid var(--darkColor-blue);
+  border-radius: 100%;
+  bottom: 0;
+  content: "";
+  height: 62%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 62%;
+}
+
+#menuButton::before
+{
+  background-color: var(--darkColor-blue);
+  border-radius: 100%;
+  bottom: 0;
+  content: "";
+  height: 40%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40%;
+}
+
+/* ---------------------- */
+#menuCloseButton
+{
+  align-items: center;
+  /* position: absolute; */
+  /* bottom: var(--gap); */
+  background-color: var(--bg-color-blue);
+  border-radius: 100px;
+  color: var(--textColorDark-blue);
+  /* Set max-width to fit-content initially */
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  gap: 6px;
+  height: 42px;
+  justify-content: center;
+  margin-top: var(--gap);
+  max-width: 100%;
+  overflow: hidden;
+  padding: 6px;
+  /* Hide the overflow when content expands */
+  position: relative;
+  /* Transition the max-width property */
+  transition: all 0.4s;
+  width: 42px;
+}
+
+#menuCloseButton:hover
+{
+  background-color: #fff;
+  width: fit-content;
+}
+
+#menuCloseButton::after
+{
+  animation: 0.6s menuCloseButtonHoverReverse forwards;
+  content: var(--hover-close-text, "Close");
+  opacity: 0;
+  padding-right: 12px;
+  transform: translateX(-20px);
+  white-space: nowrap;
+  z-index: 1;
+}
+
+#menuCloseButton:hover::after
+{
+  animation: 0.6s menuCloseButtonHover forwards;
+  animation-delay: 0.1s;
+  content: var(--hover-close-text, "Close");
+  /* width: 32px; */
+  /* Expand the max-width on hover */
+  padding-left: 36px;
+  padding-right: 12px;
+}
+
+@keyframes menuCloseButtonHover
+{
+  0%
+  {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  100%
+  {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes menuCloseButtonHoverReverse
+{
+  0%
+  {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100%
+  {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+#menuCloseButton .icon
+{
+  background-color: #fff;
+  border-radius: 100px;
+  height: 30px;
+  left: 6px;
+  position: absolute;
+  transition: 0.4s;
+  /* transform: translateX(30px); */
+  width: 30px;
+  z-index: 2;
+}
+
+/* #menuCloseButton .icon:hover{
+    transition: all 0.2s;
+    transform: rotate(90deg);
+} */
+
+#menuCloseButton:hover .icon
+{
+  transform: translateX(0) rotate(90deg);
+}
+
+.sites
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: start;
+  margin-top: 2rem;
+}
+
+.site
+{
+  text-align: center;
+  width: 108px;
+  height: 80px;
+  padding: 12px 6px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.site img
+{
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.site a
+{
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.site p
+{
+  margin-top: 4px;
+}
