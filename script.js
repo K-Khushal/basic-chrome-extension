@@ -3102,6 +3102,8 @@ document.addEventListener("DOMContentLoaded", () =>
       const url = new URL(site.url);
       const domain = url.hostname;
 
+      console.log(domain);
+
       // Check if the site is localhost or a private IP
       const isLocal = domain === "localhost" || domain.startsWith("127.") || domain.startsWith("192.")
         || domain.startsWith("10.") || domain.endsWith(".local");
@@ -3109,7 +3111,7 @@ document.addEventListener("DOMContentLoaded", () =>
       // Use a placeholder favicon for localhost
       const faviconUrl = isLocal
         ? "assets/browser.png" // Fallback favicon for local URLs
-        : `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
+        : `https://s2.googleusercontent.com/s2/favicons?domain_url=https://${domain}&sz=256`;
 
       const truncatedTitle = site.title.length > 10 ? site.title.substring(0, 10) + "..." : site.title;
 
